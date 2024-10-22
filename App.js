@@ -5,6 +5,23 @@ import { useState } from 'react';
 
 export default function App() {
   const[tela,setTela] = useState('menu')
+  const[    jogadorAtual,setJogadorAtual] = useState('');
+  const[tabuleiro, settabuleiro] = useState([]);
+  const[jogadasRestante, setJogadasRestantes] = useState(0);
+  const[ganhador, setGanhador] = useState('');
+
+  function iniciarJogo(jogador){
+    setJogadorAtual(jogador);
+    setJogadasRestantes(9);
+    settabuleiro([
+                ['','',''],
+                ['','',''],
+                ['','',''],
+              ]);
+    setTela('jogo')
+  }
+
+
 switch(tela){
   case'menu':
     return getTelaMenu();
@@ -21,11 +38,13 @@ function getTelaMenu(){
     <StatusBar style="auto" />
 
     <View style={styles.inlineItems}>
-      <TouchableOpacity style={styles.boxJogador}>
+      <TouchableOpacity style={styles.boxJogador}
+      onPress={()=> iniciarJogo('X')}>
        <Text style={styles.jogadorX}>X</Text>
       </TouchableOpacity>
     
-      <TouchableOpacity style={styles.boxJogador}>
+      <TouchableOpacity style={styles.boxJogador}
+      onPress={()=> iniciarJogo('O')}>
         <Text style={styles.jogadorO}>O</Text>
       </TouchableOpacity>
     </View>
